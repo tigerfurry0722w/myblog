@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>小虎的部落格</title>
+    <style>
+        :root {
+            --primary-color: #4A90E2;
+            --bg-color: #F8FAFC;
+            --card-bg: #FFFFFF;
+            --text-color: #334155;
+            --gray-text: #94A3B8;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background-color: var(--bg-color);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 800px;
+            background: var(--card-bg);
+            border-radius: 20px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+            padding: 40px;
+            position: relative;
+        }
+
+        /* 頂部欄 */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+
+        .welcome-section {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .logo-box {
+            width: 45px;
+            height: 45px;
+            background: linear-gradient(135deg, #66a6ff 0%, #89f7fe 100%);
+            border-radius: 12px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-size: 24px;
+            box-shadow: 0 4px 10px rgba(102, 166, 255, 0.3);
+        }
+
+        .welcome-text {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--text-color);
+        }
+
+        .login-btn {
+            background-color: #FFF5F5;
+            color: #FF5A5F;
+            border: none;
+            padding: 8px 20px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: 0.3s;
+        }
+
+        .login-btn:hover {
+            background-color: #FFE5E5;
+        }
+
+        /* 內容區域 */
+        .content-area {
+            border: 2px dashed #E2E8F0;
+            border-radius: 24px;
+            min-height: 400px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 20px;
+        }
+
+        /* 貼文預覽（未登入狀態） */
+        .post-placeholder {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .icon-empty {
+            font-size: 50px;
+            color: #E2E8F0;
+            margin-bottom: 10px;
+        }
+
+        .post-status {
+            font-weight: bold;
+            color: var(--gray-text);
+            letter-spacing: 2px;
+        }
+
+        .sub-text {
+            color: #CBD5E1;
+            font-size: 0.95rem;
+        }
+
+        .footer-note {
+            position: absolute;
+            bottom: -30px;
+            left: 0;
+            right: 0;
+            text-align: center;
+            font-size: 12px;
+            color: #CBD5E1;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="header">
+            <div class="welcome-section">
+                <div class="logo-box">✦</div>
+                <div class="welcome-text">歡迎光臨</div>
+            </div>
+            <button class="login-btn" onclick="showLoginInfo()">登入入口</button>
+        </div>
+
+        <hr style="border: none; border-top: 1px solid #F1F5F9; margin-bottom: 30px;">
+
+        <div class="content-area">
+            <div class="post-placeholder">
+                <div class="icon-empty">📁</div>
+                <div class="post-status">**暫無貼文**</div>
+                <div class="sub-text">目前沒有任何內容需要處理</div>
+                
+                <div style="margin-top: 20px; padding: 15px; background: #F8FAFC; border-radius: 10px;">
+                    <strong style="color: #64748B;">測試</strong><br>
+                    <span style="color: #94A3B8; font-size: 0.8rem;">狀態：需要登入來查看普通帳號即可</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer-note">
+            Authorized Personnel Only - Contact: tigerfurry0722@github.io
+        </div>
+    </div>
+
+    <script>
+        function showLoginInfo() {
+            // 彈出訊息告知
+            alert("tigerfurry0722.github.io 說：\n暫時只開放訪客登入，系統維護中。");
+        }
+    </script>
+</body>
+</html>
