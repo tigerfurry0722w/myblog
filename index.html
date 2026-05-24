@@ -3,169 +3,42 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>小虎的部落格</title>
-    <style>
-        :root {
-            --primary-color: #4A90E2;
-            --bg-color: #F8FAFC;
-            --card-bg: #FFFFFF;
-            --text-color: #334155;
-            --gray-text: #94A3B8;
-        }
-
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-            background-color: var(--bg-color);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            margin: 0;
-        }
-
-        .container {
-            width: 90%;
-            max-width: 800px;
-            background: var(--card-bg);
-            border-radius: 20px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.05);
-            padding: 40px;
-            position: relative;
-        }
-
-        /* 頂部欄 */
-        .header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 30px;
-        }
-
-        .welcome-section {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
-
-        .logo-box {
-            width: 45px;
-            height: 45px;
-            background: linear-gradient(135deg, #66a6ff 0%, #89f7fe 100%);
-            border-radius: 12px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            color: white;
-            font-size: 24px;
-            box-shadow: 0 4px 10px rgba(102, 166, 255, 0.3);
-        }
-
-        .welcome-text {
-            font-size: 1.5rem;
-            font-weight: bold;
-            color: var(--text-color);
-        }
-
-        .login-btn {
-            background-color: #FFF5F5;
-            color: #FF5A5F;
-            border: none;
-            padding: 8px 20px;
-            border-radius: 20px;
-            cursor: pointer;
-            font-weight: 500;
-            transition: 0.3s;
-        }
-
-        .login-btn:hover {
-            background-color: #FFE5E5;
-        }
-
-        /* 內容區域 */
-        .content-area {
-            border: 2px dashed #E2E8F0;
-            border-radius: 24px;
-            min-height: 400px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            padding: 20px;
-        }
-
-        /* 貼文預覽（未登入狀態） */
-        .post-placeholder {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 15px;
-        }
-
-        .icon-empty {
-            font-size: 50px;
-            color: #E2E8F0;
-            margin-bottom: 10px;
-        }
-
-        .post-status {
-            font-weight: bold;
-            color: var(--gray-text);
-            letter-spacing: 2px;
-        }
-
-        .sub-text {
-            color: #CBD5E1;
-            font-size: 0.95rem;
-        }
-
-        .footer-note {
-            position: absolute;
-            bottom: -30px;
-            left: 0;
-            right: 0;
-            text-align: center;
-            font-size: 12px;
-            color: #CBD5E1;
-        }
-    </style>
+    <title>服務台離站提醒</title>
+    <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body>
+<body class="bg-gray-50 min-h-screen flex items-center justify-center p-4">
 
-    <div class="container">
-        <div class="header">
-            <div class="welcome-section">
-                <div class="logo-box">✦</div>
-                <div class="welcome-text">歡迎光臨</div>
-            </div>
-            <button class="login-btn" onclick="showLoginInfo()">登入入口</button>
-        </div>
-
-        <hr style="border: none; border-top: 1px solid #F1F5F9; margin-bottom: 30px;">
-
-        <div class="content-area">
-            <div class="post-placeholder">
-                <div class="icon-empty">📁</div>
-                <div class="post-status">**暫無貼文**</div>
-                <div class="sub-text">目前沒有任何內容需要處理</div>
-                
-                <div style="margin-top: 20px; padding: 15px; background: #F8FAFC; border-radius: 10px;">
-                    <strong style="color: #64748B;">測試</strong><br>
-                    <span style="color: #94A3B8; font-size: 0.8rem;">狀態：需要登入來查看普通帳號即可</span>
+    <div class="max-w-md w-full bg-white rounded-2xl shadow-xl p-6 border-t-4 border-amber-500">
+        
+        <!-- Header with Warning Icon -->
+        <div class="text-center mb-6">
+            <div class="flex justify-center mb-4">
+                <div class="bg-amber-100 p-3 rounded-full">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-amber-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+                    </svg>
                 </div>
             </div>
+            <h1 class="text-xl font-bold text-gray-800">您即將離開服務台</h1>
+            <p class="text-red-600 font-bold mt-3 text-sm">
+                請勿在不知情的情況下填寫機密資訊 (如：個人資料、信用卡資訊)。
+            </p>
         </div>
 
-        <div class="footer-note">
-            Authorized Personnel Only - Contact: tigerfurry0722@github.io
+        <div class="mb-6">
+            <a href="https://forms.gle/rKpUfJg7L1UMqQw8A" 
+               class="block w-full bg-green-600 text-white text-center font-bold py-4 rounded-xl hover:bg-green-700 transition shadow-lg text-lg">
+                一鍵前往目標網址
+            </a>
+        </div>
+
+        <div class="border-t pt-4 text-[12px] text-gray-500 text-center space-y-2">
+            <p>💡 遇到疑問？</p>
+            <p>請撥打 <a href="tel:165" class="text-blue-600 underline font-bold">165 反詐騙專線</a></p>
+            <p>或參考 <a href="https://165.npa.gov.tw/" target="_blank" class="text-blue-600 underline">內政部警政署 165 全民防騙網</a></p>
+            <p>需要協助嗎？請<a href="https://forms.gle/Zq3ZYcVPqH1noW8g6" class="text-blue-600 underline font-bold">前往服務台</a></p>
         </div>
     </div>
 
-    <script>
-        function showLoginInfo() {
-            // 彈出訊息告知
-            alert("tigerfurry0722.github.io 說：\n暫時只開放訪客登入，系統維護中。");
-        }
-    </script>
 </body>
 </html>
