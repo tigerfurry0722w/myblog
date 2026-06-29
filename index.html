@@ -3,40 +3,107 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>服務台離站提醒</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+    <title>投票受理確認</title>
+    <style>
+        body {
+            font-family: "Helvetica Neue", Helvetica, Arial, "PingFang TC", "Hiragino Sans GB", "Microsoft JhengHei", sans-serif;
+            background-color: #f8f9fa;
+            color: #333333;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .card {
+            background-color: #ffffff;
+            border-radius: 16px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            padding: 30px;
+            max-width: 680px;
+            width: 100%;
+            text-align: center;
+            box-sizing: border-box;
+        }
+        h1 {
+            color: #2c3e50;
+            font-size: 28px;
+            margin-bottom: 8px;
+        }
+        .status-message {
+            font-size: 20px;
+            color: #2ecc71;
+            font-weight: bold;
+            margin-bottom: 30px;
+        }
+        .divider {
+            height: 1px;
+            background-color: #e0e0e0;
+            margin: 25px 0;
+        }
+        .problem-title {
+            font-size: 18px;
+            color: #e74c3c;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+        .iframe-wrapper {
+            position: relative;
+            width: 100%;
+            overflow: hidden;
+            margin-bottom: 25px;
+            border-radius: 8px;
+            border: 1px solid #e0e0e0;
+        }
+        iframe {
+            width: 100%;
+            max-width: 640px;
+            display: block;
+            margin: 0 auto;
+        }
+        .line-section {
+            margin-top: 20px;
+            font-size: 16px;
+        }
+        .line-button {
+            display: inline-block;
+            background-color: #06C755;
+            color: #ffffff;
+            text-decoration: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-weight: bold;
+            margin-top: 10px;
+            transition: background-color 0.2s;
+        }
+        .line-button:hover {
+            background-color: #05b34c;
+        }
+    </style>
 </head>
-<body class="bg-gray-50 min-h-screen flex items-center justify-center p-4">
+<body>
 
-    <div class="max-w-md w-full bg-white rounded-2xl shadow-xl p-6 border-t-4 border-amber-500">
+    <div class="card">
+        <!-- 💡 感謝與狀態顯示區 -->
+        <h1>謝謝 🎉</h1>
+        <div class="status-message">您的投票已受理 👍</div>
+
+        <div class="divider"></div>
+
+        <!-- 💡 問題回報與表單區 -->
+        <div class="problem-title">遇到問題了嗎？ 🤔</div>
+        <p style="color: #666; margin-bottom: 15px;">請填寫下方表單回報給我們：</p>
         
-        <!-- Header with Warning Icon -->
-        <div class="text-center mb-6">
-            <div class="flex justify-center mb-4">
-                <div class="bg-amber-100 p-3 rounded-full">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-amber-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
-                    </svg>
-                </div>
-            </div>
-            <h1 class="text-xl font-bold text-gray-800">您即將離開服務台</h1>
-            <p class="text-red-600 font-bold mt-3 text-sm">
-                請勿在不知情的情況下填寫機密資訊 (如：個人資料、信用卡資訊)。
-            </p>
+        <div class="iframe-wrapper">
+            <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSeXzxSy8LtpWqrW82naULjQO6eGc8q46rqDJ0ziOvccXbnHNw/viewform?embedded=true" width="640" height="1574" frameborder="0" marginheight="0" marginwidth="0">載入中…</iframe>
         </div>
+        
+        <div class="divider"></div>
 
-        <div class="mb-6">
-            <a href="https://forms.gle/rKpUfJg7L1UMqQw8A" 
-               class="block w-full bg-green-600 text-white text-center font-bold py-4 rounded-xl hover:bg-green-700 transition shadow-lg text-lg">
-                一鍵前往目標網址
-            </a>
-        </div>
-
-        <div class="border-t pt-4 text-[12px] text-gray-500 text-center space-y-2">
-            <p>💡 遇到疑問？</p>
-            <p>請撥打 <a href="tel:165" class="text-blue-600 underline font-bold">165 反詐騙專線</a></p>
-            <p>或參考 <a href="https://165.npa.gov.tw/" target="_blank" class="text-blue-600 underline">內政部警政署 165 全民防騙網</a></p>
-            <p>需要協助嗎？請<a href="https://forms.gle/Zq3ZYcVPqH1noW8g6" class="text-blue-600 underline font-bold">前往服務台</a></p>
+        <!-- 💡 LINE 聯絡區 -->
+        <div class="line-section">
+            <p>或直接透過 LINE 與我們聯繫：</p>
+            <a href="https://lin.ee/nCzNTNv" target="_blank" class="line-button">💬 點擊加入 LINE 官方帳號</a>
         </div>
     </div>
 
