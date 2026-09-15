@@ -199,13 +199,106 @@
                         <i class="fa-brands fa-discord"></i>
                         <span>私訊站長 / 邀請連結</span>
                     </a>
-                    <a href="https://support.discord.com/hc/zh-tw" target="_blank" class="w-full py-2.5 px-3 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 font-semibold text-xs transition-all flex items-center justify-center space-x-2 border border-slate-700">
+                    <a href="https://support.discord.com/hc/zh-tw/requests/new?" target="_blank" class="w-full py-2.5 px-3 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 font-semibold text-xs transition-all flex items-center justify-center space-x-2 border border-slate-700">
                         <i class="fa-solid fa-ticket"></i>
                         <span>Discord 客服請求</span>
                     </a>
                 </div>
             </div>
 
+        </div>
+
+        <!-- Refund Section (退款專區) -->
+        <div class="glass-card rounded-3xl p-8 md:p-10 mb-16 border border-cyan-500/30 shadow-2xl relative overflow-hidden">
+            <div class="absolute -left-10 -top-10 w-48 h-48 bg-cyan-500/10 rounded-full blur-3xl pointer-events-none"></div>
+            <div class="flex items-center space-x-4 mb-6">
+                <div class="w-12 h-12 rounded-xl bg-cyan-500/20 text-cyan-400 flex items-center justify-center text-xl">
+                    <i class="fa-solid fa-rotate-left"></i>
+                </div>
+                <div>
+                    <h2 class="text-2xl font-extrabold text-white">退款與爭議處理專區</h2>
+                    <p class="text-slate-400 text-sm">各平台與付款方式退款管道指引</p>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                <!-- App Store -->
+                <div class="bg-slate-900/60 border border-slate-800 p-4 rounded-xl flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-center space-x-2 text-white font-semibold mb-2">
+                            <i class="fa-brands fa-app-store text-lg text-cyan-400"></i>
+                            <span>App Store 退款</span>
+                        </div>
+                        <p class="text-slate-400 text-xs mb-4">適用於 iOS 應用程式內購買與訂閱退款申請。</p>
+                    </div>
+                    <a href="https://reportaproblem.apple.com" target="_blank" class="w-full py-2 px-3 rounded-lg bg-cyan-500/10 hover:bg-cyan-500 text-cyan-400 hover:text-white font-medium text-xs transition-all flex items-center justify-center space-x-2 border border-cyan-500/20">
+                        <span>前往 Apple 問題回報</span>
+                        <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>
+                    </a>
+                </div>
+
+                <!-- Google Play -->
+                <div class="bg-slate-900/60 border border-slate-800 p-4 rounded-xl flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-center space-x-2 text-white font-semibold mb-2">
+                            <i class="fa-brands fa-google-play text-lg text-emerald-400"></i>
+                            <span>Google Play 退款</span>
+                        </div>
+                        <p class="text-slate-400 text-xs mb-4">適用於 Android 應用程式內購買與交易退款。</p>
+                    </div>
+                    <a href="https://support.google.com/googleplay/workflow/9813244?hl=zh-Hant" target="_blank" class="w-full py-2 px-3 rounded-lg bg-emerald-500/10 hover:bg-emerald-500 text-emerald-400 hover:text-white font-medium text-xs transition-all flex items-center justify-center space-x-2 border border-emerald-500/20">
+                        <span>Google Play 退款指引</span>
+                        <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>
+                    </a>
+                </div>
+
+                <!-- Discord 官方退款 -->
+                <div class="bg-slate-900/60 border border-slate-800 p-4 rounded-xl flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-center space-x-2 text-white font-semibold mb-2">
+                            <i class="fa-brands fa-discord text-lg text-indigo-400"></i>
+                            <span>Discord 官方退款</span>
+                        </div>
+                        <p class="text-slate-400 text-xs mb-4">適用於 Nitro 訂閱或伺服器加成等官方交易退款。</p>
+                    </div>
+                    <a href="https://support.discord.com/hc/zh-tw/requests/new?" target="_blank" class="w-full py-2 px-3 rounded-lg bg-indigo-500/10 hover:bg-indigo-500 text-indigo-400 hover:text-white font-medium text-xs transition-all flex items-center justify-center space-x-2 border border-indigo-500/20">
+                        <span>提交 Discord 請求</span>
+                        <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>
+                    </a>
+                </div>
+
+                <!-- PayPal 退款 -->
+                <div class="bg-slate-900/60 border border-slate-800 p-4 rounded-xl flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-center space-x-2 text-white font-semibold mb-2">
+                            <i class="fa-brands fa-paypal text-lg text-blue-400"></i>
+                            <span>PayPal 退款與爭議</span>
+                        </div>
+                        <p class="text-slate-400 text-xs mb-4">適用於透過 PayPal 進行的付款與交易爭議處理。</p>
+                    </div>
+                    <a href="https://www.paypal.com/disputes/dashboard/" target="_blank" class="w-full py-2 px-3 rounded-lg bg-blue-500/10 hover:bg-blue-500 text-blue-400 hover:text-white font-medium text-xs transition-all flex items-center justify-center space-x-2 border border-blue-500/20">
+                        <span>開啟 PayPal 調解中心</span>
+                        <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>
+                    </a>
+                </div>
+
+                <!-- 刷卡退款說明 -->
+                <div class="bg-slate-900/60 border border-slate-800 p-4 rounded-xl flex flex-col justify-between md:col-span-2 lg:col-span-2">
+                    <div>
+                        <div class="flex items-center space-x-2 text-white font-semibold mb-2">
+                            <i class="fa-solid fa-credit-card text-lg text-amber-400"></i>
+                            <span>信用卡 / 金融卡刷卡退款</span>
+                        </div>
+                        <p class="text-slate-400 text-xs mb-3 leading-relaxed">
+                            若您透過信用卡刷卡付款，請使用 Discord 客服退款，或直接撥打卡片背面銀行客服電話辦理。<strong>旅服中心無法協助辦理刷卡退款。</strong>
+                        </p>
+                    </div>
+                    <div class="flex items-center space-x-2 text-xs text-amber-300/80 bg-amber-500/10 p-2.5 rounded-lg border border-amber-500/20">
+                        <i class="fa-solid fa-triangle-exclamation"></i>
+                        <span>本伺服器管理團隊無權直接協助刷卡退款，請聯繫發卡銀行或對應平台。</span>
+                    </div>
+                </div>
+            </div>
         </div>
 
         <!-- Community Banner -->
