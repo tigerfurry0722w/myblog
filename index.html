@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>伺服器旅客服務中心</title>
-    <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
@@ -26,23 +25,163 @@
             }
         }
     </script>
-    <!-- FontAwesome for icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Google Fonts Inter -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Noto+Sans+TC:wght@300;400;500;700;900&display=swap" rel="stylesheet">
     <style>
         body {
             font-family: 'Inter', 'Noto Sans TC', sans-serif;
         }
+
+        /* Glassmorphism Cards */
         .glass-card {
-            background: rgba(30, 41, 59, 0.7);
+            background: rgba(30, 41, 59, 0.75);
             backdrop-filter: blur(12px);
             border: 1px solid rgba(255, 255, 255, 0.1);
         }
         .light .glass-card {
-            background: rgba(255, 255, 255, 0.8);
-            border: 1px solid rgba(0, 0, 0, 0.05);
+            background: rgba(255, 255, 255, 0.85);
+            border: 1px solid rgba(0, 0, 0, 0.08);
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05);
         }
+
+        /* Starry Night Background with City Skyline & Glowing Yellow Windows */
+        .bg-night-sky {
+            background: linear-gradient(to bottom, #020617 0%, #090d16 50%, #0f172a 100%);
+            position: relative;
+            overflow-x: hidden;
+        }
+        .light .bg-night-sky {
+            background: linear-gradient(to bottom, #dbeafe 0%, #eff6ff 50%, #f8fafc 100%);
+        }
+
+        /* Stars generator */
+        .stars {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 60%;
+            background-image: 
+                radial-gradient(2px 2px at 20px 30px, #ffffff, rgba(0,0,0,0)),
+                radial-gradient(2px 2px at 40px 70px, #ffffff, rgba(0,0,0,0)),
+                radial-gradient(1px 1px at 90px 40px, #ffffff, rgba(0,0,0,0)),
+                radial-gradient(2px 2px at 160px 120px, #ffd700, rgba(0,0,0,0)),
+                radial-gradient(2px 2px at 230px 80px, #ffffff, rgba(0,0,0,0)),
+                radial-gradient(1px 1px at 320px 150px, #ffffff, rgba(0,0,0,0)),
+                radial-gradient(2px 2px at 450px 60px, #ffd700, rgba(0,0,0,0)),
+                radial-gradient(1.5px 1.5px at 520px 180px, #ffffff, rgba(0,0,0,0)),
+                radial-gradient(2px 2px at 630px 100px, #ffffff, rgba(0,0,0,0)),
+                radial-gradient(2px 2px at 750px 40px, #ffd700, rgba(0,0,0,0)),
+                radial-gradient(1px 1px at 850px 130px, #ffffff, rgba(0,0,0,0)),
+                radial-gradient(2px 2px at 950px 90px, #ffffff, rgba(0,0,0,0));
+            background-repeat: repeat;
+            background-size: 1000px 400px;
+            opacity: 0.8;
+            z-index: 0;
+            pointer-events: none;
+            transition: opacity 0.5s ease;
+        }
+        .light .stars {
+            opacity: 0;
+        }
+
+        /* City Skyline Silhouette with Glowing Yellow Windows */
+        .city-skyline {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 220px;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 320' preserveAspectRatio='none'%3E%3Cpath fill='%230b0f19' d='M0,320 L0,220 L40,220 L40,160 L60,160 L60,220 L100,220 L100,120 L140,120 L140,220 L180,220 L180,90 L220,90 L220,220 L270,220 L270,140 L310,140 L310,220 L360,220 L360,70 L400,70 L400,220 L450,220 L450,110 L490,110 L490,220 L550,220 L550,50 L590,50 L590,220 L640,220 L640,130 L680,130 L680,220 L730,220 L730,80 L780,80 L780,220 L830,220 L830,150 L870,150 L870,220 L920,220 L920,60 L970,60 L970,220 L1020,220 L1020,100 L1070,100 L1070,220 L1130,220 L1130,130 L1170,130 L1170,220 L1230,220 L1230,90 L1280,90 L1280,220 L1340,220 L1340,150 L1400,150 L1400,220 L1440,220 L1440,320 Z'%3E%3C/path%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-size: 100% 100%;
+            z-index: 1;
+            pointer-events: none;
+            opacity: 0.9;
+        }
+        .light .city-skyline {
+            opacity: 0.2;
+            filter: grayscale(100%);
+        }
+
+        /* Glowing Yellow Windows Grid Overlay */
+        .city-windows {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 180px;
+            background-image: radial-gradient(circle, #fde047 1.5px, transparent 1.5px);
+            background-size: 16px 20px;
+            opacity: 0.45;
+            z-index: 2;
+            pointer-events: none;
+            mask-image: linear-gradient(to top, rgba(0,0,0,1) 40%, rgba(0,0,0,0) 100%);
+            -webkit-mask-image: linear-gradient(to top, rgba(0,0,0,1) 40%, rgba(0,0,0,0) 100%);
+            transition: opacity 0.5s ease;
+        }
+        .light .city-windows {
+            opacity: 0;
+        }
+
+        /* Draggable Moon Easter Egg */
+        .draggable-moon {
+            position: fixed;
+            top: 25px;
+            right: 40px;
+            width: 55px;
+            height: 55px;
+            background: radial-gradient(circle at 35% 35%, #fffbeb, #fde047 70%, #ca8a04);
+            border-radius: 50%;
+            box-shadow: 0 0 25px rgba(253, 224, 71, 0.6), inset -5px -5px 12px rgba(161, 98, 7, 0.5);
+            cursor: grab;
+            z-index: 100;
+            touch-action: none;
+            transition: transform 0.1s ease, box-shadow 0.3s ease;
+        }
+        .draggable-moon:active {
+            cursor: grabbing;
+            transform: scale(1.1);
+        }
+        .light .draggable-moon {
+            /* Transforms into a Sun in Day mode */
+            background: radial-gradient(circle at 50% 50%, #fef08a, #eab308 70%, #b45309);
+            box-shadow: 0 0 35px #eab308;
+            top: 25px;
+            right: 40px;
+        }
+
+        /* Trash Can for Easter Egg */
+        #trashCan {
+            position: fixed;
+            top: 20px;
+            left: 24px;
+            width: 65px;
+            height: 65px;
+            background: rgba(15, 23, 42, 0.85);
+            border: 2px dashed rgba(244, 63, 94, 0.6);
+            border-radius: 16px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: #fb7185;
+            z-index: 99;
+            backdrop-filter: blur(8px);
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+        }
+        #trashCan.highlight {
+            background: rgba(244, 63, 94, 0.25);
+            border-color: #f43f5e;
+            transform: scale(1.1);
+        }
+        .light #trashCan {
+            background: rgba(255, 255, 255, 0.9);
+            border: 2px dashed #e11d48;
+            color: #e11d48;
+        }
+
         @keyframes float {
             0%, 100% { transform: translateY(0px); }
             50% { transform: translateY(-8px); }
@@ -52,45 +191,54 @@
         }
     </style>
 </head>
-<body class="bg-slate-950 text-slate-100 min-h-screen flex flex-col selection:bg-indigo-500 selection:text-white transition-colors duration-300">
+<body class="bg-night-sky text-slate-100 min-h-screen flex flex-col selection:bg-indigo-500 selection:text-white transition-colors duration-500 relative">
+
+    <div class="stars"></div>
+    <div class="city-skyline"></div>
+    <div class="city-windows"></div>
+
+    <!-- Draggable Moon Easter Egg -->
+    <div id="draggableMoon" class="draggable-moon" title="提示：按住月亮拖曳到左上角垃圾桶看看！"></div>
+
+    <!-- Trash Can (Top-Left) -->
+    <div id="trashCan">
+        <i class="fa-solid fa-trash-can text-xl"></i>
+        <span class="text-[9px] font-bold mt-0.5">丟月亮</span>
+    </div>
 
     <!-- Header / Navbar -->
-    <header class="w-full border-b border-slate-800/80 backdrop-blur-md sticky top-0 z-50 bg-slate-950/80">
+    <header class="w-full border-b border-slate-800/80 backdrop-blur-md sticky top-0 z-40 bg-slate-950/80 light:bg-white/80 light:border-slate-200">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
             <div class="flex items-center space-x-3">
                 <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-indigo-500 to-violet-500 flex items-center justify-center shadow-lg shadow-indigo-500/30 text-white font-bold text-xl">
                     <i class="fa-solid fa-compass"></i>
                 </div>
                 <div>
-                    <span class="font-extrabold text-lg tracking-tight bg-gradient-to-r from-indigo-400 to-violet-400 bg-clip-text text-transparent">旅客服務中心</span>
-                    <span class="block text-xs text-slate-400">Server Support & Service Hub</span>
+                    <span class="font-extrabold text-lg tracking-tight bg-gradient-to-r from-indigo-400 to-violet-400 bg-clip-text text-transparent light:from-indigo-600 light:to-violet-600">旅客服務中心</span>
+                    <span class="block text-xs text-slate-400 light:text-slate-500">Server Support & Service Hub</span>
                 </div>
             </div>
             
             <div class="flex items-center space-x-4">
-                <a href="https://discord.gg/nwsDQfdTYZ" target="_blank" class="hidden sm:inline-flex items-center space-x-2 px-4 py-2 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white font-medium text-sm transition-all shadow-lg shadow-indigo-600/20 active:scale-95">
+                <a href="https://discord.gg/nwsDQfdTYZ" target="_blank" class="inline-flex items-center space-x-2 px-4 py-2 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white font-medium text-sm transition-all shadow-lg shadow-indigo-600/20 active:scale-95">
                     <i class="fa-brands fa-discord"></i>
                     <span>加入本站 Discord</span>
                 </a>
-                <button id="themeToggle" class="w-10 h-10 rounded-xl bg-slate-900 border border-slate-800 flex items-center justify-center text-slate-300 hover:text-white transition-colors">
-                    <i class="fa-solid fa-moon dark:hidden"></i>
-                    <i class="fa-solid fa-sun hidden dark:inline"></i>
-                </button>
             </div>
         </div>
     </header>
 
     <!-- Hero Section -->
-    <main class="flex-grow max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-16 w-full">
+    <main class="flex-grow max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-16 w-full relative z-10">
         <div class="text-center max-w-3xl mx-auto mb-16 animate-float">
-            <div class="inline-flex items-center space-x-2 px-4 py-1.5 rounded-full bg-indigo-500/10 border border-indigo-500/20 text-indigo-400 text-xs font-semibold mb-6 uppercase tracking-wider">
+            <div class="inline-flex items-center space-x-2 px-4 py-1.5 rounded-full bg-indigo-500/10 border border-indigo-500/20 text-indigo-400 text-xs font-semibold mb-6 uppercase tracking-wider light:bg-indigo-50 light:text-indigo-600 light:border-indigo-200">
                 <span class="w-2 h-2 rounded-full bg-indigo-400 animate-ping"></span>
                 <span>歡迎來到官方服務中心</span>
             </div>
-            <h1 class="text-5xl md:text-7xl font-black tracking-tight text-white mb-6">
+            <h1 class="text-5xl md:text-7xl font-black tracking-tight text-white light:text-slate-900 mb-6">
                 Hi! <span class="bg-gradient-to-r from-indigo-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">今天想做什麼？</span>
             </h1>
-            <p class="text-slate-400 text-lg md:text-xl font-normal leading-relaxed">
+            <p class="text-slate-400 light:text-slate-600 text-lg md:text-xl font-normal leading-relaxed">
                 無論是尋求外務合作、提出寶貴意見、申訴檢舉還是領取身分組，我們隨時為您提供協助。
             </p>
         </div>
@@ -104,8 +252,8 @@
                     <div class="w-14 h-14 rounded-xl bg-rose-500/10 text-rose-400 flex items-center justify-center text-2xl mb-5 group-hover:scale-110 transition-transform">
                         <i class="fa-solid fa-triangle-exclamation"></i>
                     </div>
-                    <h3 class="text-xl font-bold text-white mb-2">違規檢舉專區</h3>
-                    <p class="text-slate-400 text-sm leading-relaxed mb-6">
+                    <h3 class="text-xl font-bold text-white light:text-slate-900 mb-2">違規檢舉專區</h3>
+                    <p class="text-slate-400 light:text-slate-600 text-sm leading-relaxed mb-6">
                         發現伺服器內有違規行為或不良玩家？請透過此表單提交詳細證據，我們將盡快處理。
                     </p>
                 </div>
@@ -121,8 +269,8 @@
                     <div class="w-14 h-14 rounded-xl bg-amber-500/10 text-amber-400 flex items-center justify-center text-2xl mb-5 group-hover:scale-110 transition-transform">
                         <i class="fa-solid fa-handshake"></i>
                     </div>
-                    <h3 class="text-xl font-bold text-white mb-2">外務部與合作</h3>
-                    <p class="text-slate-400 text-sm leading-relaxed mb-6">
+                    <h3 class="text-xl font-bold text-white light:text-slate-900 mb-2">外務部與合作</h3>
+                    <p class="text-slate-400 light:text-slate-600 text-sm leading-relaxed mb-6">
                         尋求伺服器聯合、宣傳合作或外交事務洽談？歡迎由此進入外務申請管道。
                     </p>
                 </div>
@@ -138,8 +286,8 @@
                     <div class="w-14 h-14 rounded-xl bg-emerald-500/10 text-emerald-400 flex items-center justify-center text-2xl mb-5 group-hover:scale-110 transition-transform">
                         <i class="fa-solid fa-lightbulb"></i>
                     </div>
-                    <h3 class="text-xl font-bold text-white mb-2">伺服器意見箱</h3>
-                    <p class="text-slate-400 text-sm leading-relaxed mb-6">
+                    <h3 class="text-xl font-bold text-white light:text-slate-900 mb-2">伺服器意見箱</h3>
+                    <p class="text-slate-400 light:text-slate-600 text-sm leading-relaxed mb-6">
                         對伺服器有任何改進建議、新功能想法或回饋？您的聲音是我們成長的最大動力。
                     </p>
                 </div>
@@ -155,8 +303,8 @@
                     <div class="w-14 h-14 rounded-xl bg-blue-500/10 text-blue-400 flex items-center justify-center text-2xl mb-5 group-hover:scale-110 transition-transform">
                         <i class="fa-solid fa-id-badge"></i>
                     </div>
-                    <h3 class="text-xl font-bold text-white mb-2">身分組領取專區</h3>
-                    <p class="text-slate-400 text-sm leading-relaxed mb-6">
+                    <h3 class="text-xl font-bold text-white light:text-slate-900 mb-2">身分組領取專區</h3>
+                    <p class="text-slate-400 light:text-slate-600 text-sm leading-relaxed mb-6">
                         想解鎖特定頻道、獲取通知身分組或展示個人喜好？點擊此處領取您的專屬身分組。
                     </p>
                 </div>
@@ -166,14 +314,14 @@
                 </a>
             </div>
 
-            <!-- 5. 私人頻道申請 (新增加) -->
+            <!-- 5. 私人頻道申請 -->
             <div class="glass-card rounded-2xl p-6 transition-all duration-300 hover:-translate-y-1 hover:border-indigo-500/50 hover:shadow-xl hover:shadow-indigo-500/10 flex flex-col justify-between group">
                 <div>
                     <div class="w-14 h-14 rounded-xl bg-violet-500/10 text-violet-400 flex items-center justify-center text-2xl mb-5 group-hover:scale-110 transition-transform">
                         <i class="fa-solid fa-door-closed"></i>
                     </div>
-                    <h3 class="text-xl font-bold text-white mb-2">私人頻道申請</h3>
-                    <p class="text-slate-400 text-sm leading-relaxed mb-6">
+                    <h3 class="text-xl font-bold text-white light:text-slate-900 mb-2">私人頻道申請</h3>
+                    <p class="text-slate-400 light:text-slate-600 text-sm leading-relaxed mb-6">
                         需要專屬的私人語音或文字頻道與朋友同樂？點擊此處提交私人頻道開設申請。
                     </p>
                 </div>
@@ -183,14 +331,14 @@
                 </a>
             </div>
 
-            <!-- 6. 站長信箱 (新增加) -->
+            <!-- 6. 站長信箱 -->
             <div class="glass-card rounded-2xl p-6 transition-all duration-300 hover:-translate-y-1 hover:border-indigo-500/50 hover:shadow-xl hover:shadow-indigo-500/10 flex flex-col justify-between group">
                 <div>
                     <div class="w-14 h-14 rounded-xl bg-pink-500/10 text-pink-400 flex items-center justify-center text-2xl mb-5 group-hover:scale-110 transition-transform">
                         <i class="fa-solid fa-envelope-open-text"></i>
                     </div>
-                    <h3 class="text-xl font-bold text-white mb-2">站長信箱</h3>
-                    <p class="text-slate-400 text-sm leading-relaxed mb-6">
+                    <h3 class="text-xl font-bold text-white light:text-slate-900 mb-2">站長信箱</h3>
+                    <p class="text-slate-400 light:text-slate-600 text-sm leading-relaxed mb-6">
                         有重要私密事務、重大反饋或需直接向最高管理層反映？歡迎透過站長信箱聯繫。
                     </p>
                 </div>
@@ -206,8 +354,8 @@
                     <div class="w-14 h-14 rounded-xl bg-purple-500/10 text-purple-400 flex items-center justify-center text-2xl mb-5 group-hover:scale-110 transition-transform">
                         <i class="fa-solid fa-layer-group"></i>
                     </div>
-                    <h3 class="text-xl font-bold text-white mb-2">其他與綜合服務</h3>
-                    <p class="text-slate-400 text-sm leading-relaxed mb-6">
+                    <h3 class="text-xl font-bold text-white light:text-slate-900 mb-2">其他與綜合服務</h3>
+                    <p class="text-slate-400 light:text-slate-600 text-sm leading-relaxed mb-6">
                         找不到對應的類別？這裏包含了其他各項綜合服務與特殊申請入口。
                     </p>
                 </div>
@@ -223,8 +371,8 @@
                     <div class="w-14 h-14 rounded-xl bg-indigo-500/10 text-indigo-400 flex items-center justify-center text-2xl mb-5 group-hover:scale-110 transition-transform">
                         <i class="fa-solid fa-headset"></i>
                     </div>
-                    <h3 class="text-xl font-bold text-white mb-2">私訊站長與 Discord 客服</h3>
-                    <p class="text-slate-400 text-sm leading-relaxed mb-6">
+                    <h3 class="text-xl font-bold text-white light:text-slate-900 mb-2">私訊站長與 Discord 客服</h3>
+                    <p class="text-slate-400 light:text-slate-600 text-sm leading-relaxed mb-6">
                         遇到緊急問題需要直接聯繫站長，或需要提交 Discord 官方請求支援？
                     </p>
                 </div>
@@ -233,7 +381,7 @@
                         <i class="fa-brands fa-discord"></i>
                         <span>私訊站長 / 邀請連結</span>
                     </a>
-                    <a href="https://support.discord.com/hc/zh-tw/requests/new?" target="_blank" class="w-full py-2.5 px-3 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 font-semibold text-xs transition-all flex items-center justify-center space-x-2 border border-slate-700">
+                    <a href="https://support.discord.com/hc/zh-tw/requests/new?" target="_blank" class="w-full py-2.5 px-3 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 font-semibold text-xs transition-all flex items-center justify-center space-x-2 border border-slate-700 light:bg-slate-200 light:text-slate-800 light:hover:bg-slate-300">
                         <i class="fa-solid fa-ticket"></i>
                         <span>Discord 客服請求</span>
                     </a>
@@ -250,20 +398,20 @@
                     <i class="fa-solid fa-rotate-left"></i>
                 </div>
                 <div>
-                    <h2 class="text-2xl font-extrabold text-white">退款與爭議處理專區</h2>
-                    <p class="text-slate-400 text-sm">各平台與付款方式退款管道指引</p>
+                    <h2 class="text-2xl font-extrabold text-white light:text-slate-900">退款與爭議處理專區</h2>
+                    <p class="text-slate-400 light:text-slate-600 text-sm">各平台與付款方式退款管道指引</p>
                 </div>
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                 <!-- App Store -->
-                <div class="bg-slate-900/60 border border-slate-800 p-4 rounded-xl flex flex-col justify-between">
+                <div class="bg-slate-900/60 light:bg-white/80 border border-slate-800 light:border-slate-200 p-4 rounded-xl flex flex-col justify-between">
                     <div>
-                        <div class="flex items-center space-x-2 text-white font-semibold mb-2">
+                        <div class="flex items-center space-x-2 text-white light:text-slate-900 font-semibold mb-2">
                             <i class="fa-brands fa-app-store text-lg text-cyan-400"></i>
                             <span>App Store 退款</span>
                         </div>
-                        <p class="text-slate-400 text-xs mb-4">適用於 iOS 應用程式內購買與訂閱退款申請。</p>
+                        <p class="text-slate-400 light:text-slate-600 text-xs mb-4">適用於 iOS 應用程式內購買與訂閱退款申請。</p>
                     </div>
                     <a href="https://reportaproblem.apple.com" target="_blank" class="w-full py-2 px-3 rounded-lg bg-cyan-500/10 hover:bg-cyan-500 text-cyan-400 hover:text-white font-medium text-xs transition-all flex items-center justify-center space-x-2 border border-cyan-500/20">
                         <span>前往 Apple 問題回報</span>
@@ -272,13 +420,13 @@
                 </div>
 
                 <!-- Google Play -->
-                <div class="bg-slate-900/60 border border-slate-800 p-4 rounded-xl flex flex-col justify-between">
+                <div class="bg-slate-900/60 light:bg-white/80 border border-slate-800 light:border-slate-200 p-4 rounded-xl flex flex-col justify-between">
                     <div>
-                        <div class="flex items-center space-x-2 text-white font-semibold mb-2">
+                        <div class="flex items-center space-x-2 text-white light:text-slate-900 font-semibold mb-2">
                             <i class="fa-brands fa-google-play text-lg text-emerald-400"></i>
                             <span>Google Play 退款</span>
                         </div>
-                        <p class="text-slate-400 text-xs mb-4">適用於 Android 應用程式內購買與交易退款。</p>
+                        <p class="text-slate-400 light:text-slate-600 text-xs mb-4">適用於 Android 應用程式內購買與交易退款。</p>
                     </div>
                     <a href="https://support.google.com/googleplay/workflow/9813244?hl=zh-Hant" target="_blank" class="w-full py-2 px-3 rounded-lg bg-emerald-500/10 hover:bg-emerald-500 text-emerald-400 hover:text-white font-medium text-xs transition-all flex items-center justify-center space-x-2 border border-emerald-500/20">
                         <span>Google Play 退款指引</span>
@@ -287,13 +435,13 @@
                 </div>
 
                 <!-- Discord 官方退款 -->
-                <div class="bg-slate-900/60 border border-slate-800 p-4 rounded-xl flex flex-col justify-between">
+                <div class="bg-slate-900/60 light:bg-white/80 border border-slate-800 light:border-slate-200 p-4 rounded-xl flex flex-col justify-between">
                     <div>
-                        <div class="flex items-center space-x-2 text-white font-semibold mb-2">
+                        <div class="flex items-center space-x-2 text-white light:text-slate-900 font-semibold mb-2">
                             <i class="fa-brands fa-discord text-lg text-indigo-400"></i>
                             <span>Discord 官方退款</span>
                         </div>
-                        <p class="text-slate-400 text-xs mb-4">適用於 Nitro 訂閱或伺服器加成等官方交易退款。</p>
+                        <p class="text-slate-400 light:text-slate-600 text-xs mb-4">適用於 Nitro 訂閱或伺服器加成等官方交易退款。</p>
                     </div>
                     <a href="https://support.discord.com/hc/zh-tw/requests/new?" target="_blank" class="w-full py-2 px-3 rounded-lg bg-indigo-500/10 hover:bg-indigo-500 text-indigo-400 hover:text-white font-medium text-xs transition-all flex items-center justify-center space-x-2 border border-indigo-500/20">
                         <span>提交 Discord 請求</span>
@@ -302,13 +450,13 @@
                 </div>
 
                 <!-- PayPal 退款 -->
-                <div class="bg-slate-900/60 border border-slate-800 p-4 rounded-xl flex flex-col justify-between">
+                <div class="bg-slate-900/60 light:bg-white/80 border border-slate-800 light:border-slate-200 p-4 rounded-xl flex flex-col justify-between">
                     <div>
-                        <div class="flex items-center space-x-2 text-white font-semibold mb-2">
+                        <div class="flex items-center space-x-2 text-white light:text-slate-900 font-semibold mb-2">
                             <i class="fa-brands fa-paypal text-lg text-blue-400"></i>
                             <span>PayPal 退款與爭議</span>
                         </div>
-                        <p class="text-slate-400 text-xs mb-4">適用於透過 PayPal 進行的付款與交易爭議處理。</p>
+                        <p class="text-slate-400 light:text-slate-600 text-xs mb-4">適用於透過 PayPal 進行的付款與交易爭議處理。</p>
                     </div>
                     <a href="https://www.paypal.com/disputes/dashboard/" target="_blank" class="w-full py-2 px-3 rounded-lg bg-blue-500/10 hover:bg-blue-500 text-blue-400 hover:text-white font-medium text-xs transition-all flex items-center justify-center space-x-2 border border-blue-500/20">
                         <span>開啟 PayPal 調解中心</span>
@@ -317,17 +465,17 @@
                 </div>
 
                 <!-- 刷卡退款說明 -->
-                <div class="bg-slate-900/60 border border-slate-800 p-4 rounded-xl flex flex-col justify-between md:col-span-2 lg:col-span-2">
+                <div class="bg-slate-900/60 light:bg-white/80 border border-slate-800 light:border-slate-200 p-4 rounded-xl flex flex-col justify-between md:col-span-2 lg:col-span-2">
                     <div>
-                        <div class="flex items-center space-x-2 text-white font-semibold mb-2">
+                        <div class="flex items-center space-x-2 text-white light:text-slate-900 font-semibold mb-2">
                             <i class="fa-solid fa-credit-card text-lg text-amber-400"></i>
                             <span>信用卡 / 金融卡刷卡退款</span>
                         </div>
-                        <p class="text-slate-400 text-xs mb-3 leading-relaxed">
+                        <p class="text-slate-400 light:text-slate-600 text-xs mb-3 leading-relaxed">
                             若您透過信用卡刷卡付款，請使用 Discord 客服退款，或直接撥打卡片背面銀行客服電話辦理。<strong>旅服中心無法協助辦理刷卡退款。</strong>
                         </p>
                     </div>
-                    <div class="flex items-center space-x-2 text-xs text-amber-300/80 bg-amber-500/10 p-2.5 rounded-lg border border-amber-500/20">
+                    <div class="flex items-center space-x-2 text-xs text-amber-300/80 light:text-amber-700 bg-amber-500/10 p-2.5 rounded-lg border border-amber-500/20">
                         <i class="fa-solid fa-triangle-exclamation"></i>
                         <span>本伺服器管理團隊無權直接協助刷卡退款，請聯繫發卡銀行或對應平台。</span>
                     </div>
@@ -336,17 +484,17 @@
         </div>
 
         <!-- Community Banner -->
-        <div class="rounded-3xl bg-gradient-to-r from-indigo-900/60 via-violet-900/60 to-purple-900/60 p-8 md:p-12 border border-indigo-500/30 shadow-2xl relative overflow-hidden flex flex-col md:flex-row items-center justify-between">
+        <div class="rounded-3xl bg-gradient-to-r from-indigo-900/60 via-violet-900/60 to-purple-900/60 light:from-indigo-100 light:via-violet-100 light:to-purple-100 p-8 md:p-12 border border-indigo-500/30 light:border-indigo-200 shadow-2xl relative overflow-hidden flex flex-col md:flex-row items-center justify-between">
             <div class="absolute -right-10 -bottom-10 w-64 h-64 bg-indigo-500/20 rounded-full blur-3xl pointer-events-none"></div>
             <div class="relative z-10 mb-6 md:mb-0 max-w-xl text-center md:text-left">
-                <h2 class="text-3xl font-extrabold text-white mb-3">準備好探索我們的社群了嗎？</h2>
-                <p class="text-indigo-200 text-base leading-relaxed">
+                <h2 class="text-3xl font-extrabold text-white light:text-slate-900 mb-3">準備好探索我們的社群了嗎？</h2>
+                <p class="text-indigo-200 light:text-indigo-900 text-base leading-relaxed">
                     立即加入本站 Discord 伺服器，與上千名成員一起交流、同樂並獲得第一手最新公告！
                 </p>
             </div>
             <div class="relative z-10 flex flex-col sm:flex-row gap-3 w-full md:w-auto">
-                <a href="https://discord.gg/nwsDQfdTYZ" target="_blank" class="px-8 py-4 rounded-2xl bg-white text-slate-950 font-bold hover:bg-indigo-50 transition-all shadow-xl text-center flex items-center justify-center space-x-2">
-                    <i class="fa-brands fa-discord text-indigo-600 text-lg"></i>
+                <a href="https://discord.gg/nwsDQfdTYZ" target="_blank" class="px-8 py-4 rounded-2xl bg-white light:bg-indigo-600 light:text-white text-slate-950 font-bold hover:bg-indigo-50 light:hover:bg-indigo-700 transition-all shadow-xl text-center flex items-center justify-center space-x-2">
+                    <i class="fa-brands fa-discord text-indigo-600 light:text-white text-lg"></i>
                     <span>立即加入本站連結</span>
                 </a>
             </div>
@@ -355,37 +503,122 @@
     </main>
 
     <!-- Footer -->
-    <footer class="border-t border-slate-800/80 bg-slate-950/60 py-8 text-center text-sm text-slate-500">
+    <footer class="border-t border-slate-800/80 light:border-slate-200 bg-slate-950/60 light:bg-white/60 py-8 text-center text-sm text-slate-500 relative z-10">
         <div class="max-w-7xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-4">
             <p>&copy; 2026 伺服器旅客服務中心. All Rights Reserved.</p>
             <div class="flex items-center space-x-6">
-                <a href="https://discord.gg/nwsDQfdTYZ" target="_blank" class="hover:text-slate-300 transition-colors">Discord 社群</a>
-                <a href="https://forms.gle/X5Qz5ouFjbEPTFbRA" target="_blank" class="hover:text-slate-300 transition-colors">意見回饋</a>
+                <a href="https://discord.gg/nwsDQfdTYZ" target="_blank" class="hover:text-slate-300 light:hover:text-slate-900 transition-colors">Discord 社群</a>
+                <a href="https://forms.gle/X5Qz5ouFjbEPTFbRA" target="_blank" class="hover:text-slate-300 light:hover:text-slate-900 transition-colors">意見回饋</a>
             </div>
         </div>
     </footer>
 
-    <!-- Script for theme toggling -->
+    <!-- Script for Draggable Moon Easter Egg & Theme Toggle Logic -->
     <script>
-        const themeToggleBtn = document.getElementById('themeToggle');
+        const moon = document.getElementById('draggableMoon');
+        const trashCan = document.getElementById('trashCan');
         const htmlElement = document.documentElement;
 
-        themeToggleBtn.addEventListener('click', () => {
-            if (htmlElement.classList.contains('dark')) {
+        let isDragging = false;
+        let startX, startY, initialX, initialY;
+
+        // Get initial positioning
+        const moonRect = moon.getBoundingClientRect();
+        initialX = moonRect.left;
+        initialY = moonRect.top;
+
+        // Mouse & Touch Dragging Events
+        function dragStart(e) {
+            isDragging = true;
+            const clientX = e.clientX || (e.touches && e.touches[0].clientX);
+            const clientY = e.clientY || (e.touches && e.touches[0].clientY);
+            
+            startX = clientX - moon.offsetLeft;
+            startY = clientY - moon.offsetTop;
+            
+            moon.style.transition = 'none';
+        }
+
+        function drag(e) {
+            if (!isDragging) return;
+            e.preventDefault();
+
+            const clientX = e.clientX || (e.touches && e.touches[0].clientX);
+            const clientY = e.clientY || (e.touches && e.touches[0].clientY);
+
+            let currentX = clientX - startX;
+            let currentY = clientY - startY;
+
+            moon.style.left = currentX + 'px';
+            moon.style.top = currentY + 'px';
+
+            // Check collision with trash can
+            const moonBox = moon.getBoundingClientRect();
+            const trashBox = trashCan.getBoundingClientRect();
+
+            if (
+                moonBox.left < trashBox.right &&
+                moonBox.right > trashBox.left &&
+                moonBox.top < trashBox.bottom &&
+                moonBox.bottom > trashBox.top
+            ) {
+                trashCan.classList.add('highlight');
+            } else {
+                trashCan.classList.remove('highlight');
+            }
+        }
+
+        function dragEnd(e) {
+            if (!isDragging) return;
+            isDragging = false;
+
+            const moonBox = moon.getBoundingClientRect();
+            const trashBox = trashCan.getBoundingClientRect();
+
+            // If dropped inside trash can -> Activate Daytime Theme!
+            if (
+                moonBox.left < trashBox.right &&
+                moonBox.right > trashBox.left &&
+                moonBox.top < trashBox.bottom &&
+                moonBox.bottom > trashBox.top
+            ) {
+                // Switch to Day Theme
                 htmlElement.classList.remove('dark');
                 htmlElement.classList.add('light');
                 localStorage.setItem('theme', 'light');
-            } else {
-                htmlElement.classList.remove('light');
-                htmlElement.classList.add('dark');
-                localStorage.setItem('theme', 'dark');
-            }
-        });
 
-        // Initialize user preference
+                // Animate moon disappearing into trash
+                moon.style.transform = 'scale(0) rotate(360deg)';
+                moon.style.opacity = '0';
+                trashCan.classList.remove('highlight');
+                trashCan.innerHTML = '<i class="fa-solid fa-sun text-xl text-amber-500"></i><span class="text-[9px] font-bold mt-0.5 text-amber-600">早安！</span>';
+                
+                setTimeout(() => {
+                    moon.style.display = 'none';
+                }, 400);
+            } else {
+                // Return moon to original position smoothly
+                moon.style.transition = 'all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275)';
+                moon.style.left = '';
+                moon.style.top = '';
+            }
+            trashCan.classList.remove('highlight');
+        }
+
+        moon.addEventListener('mousedown', dragStart);
+        window.addEventListener('mousemove', drag);
+        window.addEventListener('mouseup', dragEnd);
+
+        moon.addEventListener('touchstart', dragStart);
+        window.addEventListener('touchmove', drag, { passive: false });
+        window.addEventListener('touchend', dragEnd);
+
+        // Initialize user preference if saved
         if (localStorage.getItem('theme') === 'light') {
             htmlElement.classList.remove('dark');
             htmlElement.classList.add('light');
+            moon.style.display = 'none';
+            trashCan.innerHTML = '<i class="fa-solid fa-sun text-xl text-amber-500"></i><span class="text-[9px] font-bold mt-0.5 text-amber-600">早安！</span>';
         }
     </script>
 </body>
